@@ -1,8 +1,18 @@
+import { lazy, Suspense } from "react";
+
+import { useAxiosLoader } from "./shared/hooks/use-axios-loader";
+import Loading from "./shared/layouts/loading";
+const Home = lazy(() => import("./pages/home"));
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
-}
+  const { isLoading } = useAxiosLoader();
 
-export default App
+  return (
+    <Suspense fallback={<Loading />}>
+      {isLoading && <Loading />}
+      <Home />
+    </Suspense>
+  );
+};
+
+export default App;

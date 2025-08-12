@@ -2,7 +2,7 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
+  setupFilesAfterEnv: ["<rootDir>/setup-tests.ts"],
    globals: {
     "ts-jest": {
       tsconfig: "<rootDir>/tsconfig.app.json"
@@ -24,7 +24,7 @@ module.exports = {
   ],
   coveragePathIgnorePatterns: [
     "/node_modules/",
-    "setupTests.ts",
+    "setup-tests.ts",
     "vite-env.d.ts",
   ],
   transform: {
