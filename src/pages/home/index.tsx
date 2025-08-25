@@ -8,7 +8,7 @@ import Pagination from "../../shared/components/pagination";
 import { ITEMS_PER_PAGE } from "../../shared/constants/constants";
 import Modal from "../../shared/components/modal";
 import { FaInfoCircle } from "react-icons/fa";
-import { Post } from "../../types/posts";
+import { Post } from "../../shared/types/posts";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -26,24 +26,24 @@ const Home = () => {
     setIsModalOpen(true);
   };
 
-  const columns: TableColumn<Post>[] = [
-    { header: "ID", accessor: "id" },
-    { header: "Type", accessor: "title" },
-    { header: "Language", accessor: "body" },
-    {
-      header: "Info",
-      accessor: "id",
-      cell: (row) => (
-        <button
-          className="info-button"
-          onClick={() => handleOpenModal(row.id)}
-          aria-label={`info-button-${row.id}`} 
-        >
-          <FaInfoCircle />
-        </button>
-      ),
-    },
-  ];
+const columns: TableColumn<Post>[] = [
+  { header: "ID", accessor: "id" },
+  { header: "Type", accessor: "title" },
+  { header: "Language", accessor: "body" },
+  {
+    header: "Info",
+    accessor: "info",
+    cell: (row) => (
+      <button
+        className="info-button"
+        onClick={() => handleOpenModal(row.id)}
+        aria-label={`info-button-${row.id}`}
+      >
+        <FaInfoCircle />
+      </button>
+    ),
+  },
+]
 
   const filteredPosts = useMemo(() => {
     const lower = searchText.toLowerCase();

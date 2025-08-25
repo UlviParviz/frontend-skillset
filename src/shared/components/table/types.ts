@@ -9,3 +9,8 @@ export type TableProps<T> = {
   data: T[];
   height?: string
 };
+
+export type TableRow = Record<string, unknown> & {
+  id?: string | number | undefined;
+};
+

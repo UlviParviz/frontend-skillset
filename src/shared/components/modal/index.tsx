@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
             &times;
           </button>
         </div>
-        <div className="modal-body">{children}</div>
+        <div className="modal-body" role="dialog">{children}</div>
       </div>
     </div>
   );

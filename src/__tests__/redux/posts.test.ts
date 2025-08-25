@@ -1,7 +1,7 @@
 import reducer from "../../shared/redux/posts/postSlice";
 import { fetchPosts, fetchPostById } from "../../shared/redux/posts/postThunks";
 import { PostsState } from "../../shared/redux/posts/types";
-import { Post } from "../../types/posts";
+import { Post } from "../../shared/types/posts";
 
 const initialState: PostsState = {
   posts: [],

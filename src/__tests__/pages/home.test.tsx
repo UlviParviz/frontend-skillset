@@ -2,6 +2,8 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Home from "../../pages/home";
 import { useAppSelector, useAppDispatch } from "../../shared/redux/hooks";
 import { fetchPostById } from "../../shared/redux/posts/postThunks";
+import userEvent from "@testing-library/user-event";
+import { within } from "@testing-library/react";
 
 jest.mock("../../shared/redux/hooks");
 jest.mock("../../shared/redux/posts/postThunks", () => ({
@@ -52,30 +54,34 @@ describe("Home component without passing posts prop", () => {
     });
   });
 
-  it("opens and closes modal on info button click", async () => {
-    (useAppSelector as jest.Mock).mockImplementation((selector) =>
-      selector({
-        posts: {
-          posts: mockPosts,
-          postDetails: mockPosts[0],
-          loading: false,
-          error: null,
-        },
-      })
-    );
 
-    render(<Home />);
+it("opens and closes modal on info button click", async () => {
+  (useAppSelector as jest.Mock).mockImplementation((selector) =>
+    selector({
+      posts: {
+        posts: mockPosts,
+        postDetails: mockPosts[0],
+        loading: false,
+        error: null,
+      },
+    })
+  );
 
-    const infoButtons = screen.getAllByRole("button", { name: /info/i });
-    fireEvent.click(infoButtons[0]);
+  render(<Home />);
 
-    expect(mockDispatch).toHaveBeenCalledWith(fetchPostById(1));
+  const user = userEvent.setup();
+  const infoButtons = screen.getAllByRole("button", { name: /info/i });
 
-    expect(screen.getByText("Type A")).toBeInTheDocument();
-    expect(screen.getByText("Body A")).toBeInTheDocument();
+  await user.click(infoButtons[0]);
 
-  });
+  expect(mockDispatch).toHaveBeenCalledWith(fetchPostById(1));
 
+  const modal = await screen.findByRole("dialog");
+
+  const modalContent = within(modal);
+  expect(modalContent.getByText("Type A")).toBeInTheDocument();
+  expect(modalContent.getByText("Body A")).toBeInTheDocument();
+});
  it("handles pagination buttons", async () => {
     const manyPosts = Array.from({ length: 12 }, (_, i) => ({
       userId: 1,
