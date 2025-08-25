@@ -4,7 +4,7 @@ import { PostsState } from "./types";
 
 const initialState: PostsState = {
   posts: [],
-  selectedPost: null,
+  postDetails: null,
   loading: false,
   detailsLoading: false,
   error: null,
@@ -34,7 +34,7 @@ const postSlice = createSlice({
     });
     builder.addCase(fetchPostById.fulfilled, (state, action) => {
       state.detailsLoading = false;
-      state.selectedPost = action.payload;
+      state.postDetails = action.payload;
     });
     builder.addCase(fetchPostById.rejected, (state, action) => {
       state.detailsLoading = false;

@@ -1,10 +1,11 @@
 import reducer from "../../shared/redux/posts/postSlice";
 import { fetchPosts, fetchPostById } from "../../shared/redux/posts/postThunks";
-import { Post, PostsState } from "../../shared/redux/posts/types";
+import { PostsState } from "../../shared/redux/posts/types";
+import { Post } from "../../types/posts";
 
 const initialState: PostsState = {
   posts: [],
-  selectedPost: null,
+  postDetails: null,
   loading: false,
   detailsLoading: false,
   error: null,
@@ -67,7 +68,7 @@ describe("postSlice reducer", () => {
         fetchPostById.fulfilled(dummyPost, "", 1)
       );
       expect(state.detailsLoading).toBe(false);
-      expect(state.selectedPost).toEqual(dummyPost);
+      expect(state.postDetails).toEqual(dummyPost);
     });
 
     it("should handle rejected", () => {

@@ -4,15 +4,15 @@ import { Table, Stack, Search, Text } from "../../shared/components";
 import type { TableColumn } from "../../shared/components/table/types";
 import { useAppDispatch, useAppSelector } from "../../shared/redux/hooks";
 import { fetchPosts, fetchPostById } from "../../shared/redux/posts/postThunks";
-import { Post } from "../../shared/redux/posts/types";
 import Pagination from "../../shared/components/pagination";
 import { ITEMS_PER_PAGE } from "../../shared/constants/constants";
 import Modal from "../../shared/components/modal";
 import { FaInfoCircle } from "react-icons/fa";
+import { Post } from "../../types/posts";
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const { posts, selectedPost } = useAppSelector((state) => state.posts);
+  const { posts, postDetails } = useAppSelector((state) => state.posts);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -83,15 +83,15 @@ const Home = () => {
         </Stack>
       )}
 
-      {selectedPost && (
+      {postDetails && (
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           title="Post Details"
         >
           <Stack display="flex" direction="column" gap={5}>
-            <Text>{selectedPost?.title}</Text>
-            <Text>{selectedPost?.body}</Text>
+            <Text>{postDetails?.title}</Text>
+            <Text>{postDetails?.body}</Text>
           </Stack>
         </Modal>
       )}

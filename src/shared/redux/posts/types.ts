@@ -1,13 +1,8 @@
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import { Post } from "../../../types/posts";
 
 export interface PostsState {
   posts: Post[];
-  selectedPost: Post | null;
+  postDetails: Post | null;
   loading: boolean;
   detailsLoading: boolean;
   error: string | null;

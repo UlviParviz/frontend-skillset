@@ -25,7 +25,7 @@ describe("Home component without passing posts prop", () => {
       selector({
         posts: {
           posts: mockPosts,
-          selectedPost: null,
+          postDetails: null,
           loading: false,
           error: null,
         },
@@ -57,7 +57,7 @@ describe("Home component without passing posts prop", () => {
       selector({
         posts: {
           posts: mockPosts,
-          selectedPost: mockPosts[0],
+          postDetails: mockPosts[0],
           loading: false,
           error: null,
         },
@@ -88,7 +88,7 @@ describe("Home component without passing posts prop", () => {
       selector({
         posts: {
           posts: manyPosts,
-          selectedPost: null,
+          postDetails: null,
           loading: false,
           error: null,
         },
