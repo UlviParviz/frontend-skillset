@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import "./index.scss";
-import type { PaginationProps } from "./types";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+
+type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  reset?: boolean;
+};
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
